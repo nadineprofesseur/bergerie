@@ -3,8 +3,8 @@ public class App {
 
 	public static void main(String[] parametres) {
 
-		VueMouton.launch(VueMouton.class, parametres);
-		
+		//VueMouton.launch(VueMouton.class, parametres);
+		VueListeMouton.launch(VueListeMouton.class, parametres);
 	}
 
 }
