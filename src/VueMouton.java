@@ -32,6 +32,14 @@ public class VueMouton extends Application{
 		panneau.getChildren().add(grilleMouton);
 		stade.setScene(new Scene(panneau, 400, 400));
 		stade.show();
+		
+		//// TEST ////
+	}
+	
+	public void afficherMouton(Mouton mouton)
+	{
+		
+		
 	}
 
 }

@@ -6,6 +6,22 @@ public class Mouton {
 	protected String naissance;
 	protected String poids;
 	
+	public Mouton(String nom) {
+		super();
+		this.nom = nom;
+	}
+	public Mouton(String nom, String couleur) {
+		super();
+		this.nom = nom;
+		this.couleur = couleur;
+	}
+	public Mouton(String nom, String couleur, String naissance, String poids) {
+		super();
+		this.nom = nom;
+		this.couleur = couleur;
+		this.naissance = naissance;
+		this.poids = poids;
+	}
 	public String getNom() {
 		return nom;
 	}
