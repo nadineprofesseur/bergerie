@@ -21,19 +21,21 @@ public class VueMouton extends Application{
 		grilleMouton.add(new Label("Couleur : "), 0, 1);
 		grilleMouton.add(valeurCouleur, 1, 1);
 
-		Label valeurNaissance = new Label("5 juin 2015");
-		grilleMouton.add(new Label("Naissance : "), 0, 2);
-		grilleMouton.add(valeurNaissance, 1, 2);				
-		
 		Label valeurPoids = new Label("20 kg");
-		grilleMouton.add(new Label("Poids : "), 0, 3);
-		grilleMouton.add(valeurPoids, 1, 3);		
-	
+		grilleMouton.add(new Label("Poids : "), 0, 2);
+		grilleMouton.add(valeurPoids, 1, 2);		
+
+		Label valeurNaissance = new Label("5 juin 2015");
+		grilleMouton.add(new Label("Naissance : "), 0, 3);
+		grilleMouton.add(valeurNaissance, 1, 3);				
+			
 		panneau.getChildren().add(grilleMouton);
 		stade.setScene(new Scene(panneau, 400, 400));
 		stade.show();
 		
 		//// TEST ////
+		Mouton mouton = new Mouton("Dolly", "Grise", "20 kg", "5 juin 2015");
+		
 	}
 	
 	public void afficherMouton(Mouton mouton)

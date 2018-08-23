@@ -3,8 +3,8 @@ public class Mouton {
 
 	protected String nom;
 	protected String couleur;
-	protected String naissance;
 	protected String poids;
+	protected String naissance;
 	
 	public Mouton(String nom) {
 		super();
@@ -15,12 +15,18 @@ public class Mouton {
 		this.nom = nom;
 		this.couleur = couleur;
 	}
-	public Mouton(String nom, String couleur, String naissance, String poids) {
+	public Mouton(String nom, String couleur, String poids) {
 		super();
 		this.nom = nom;
 		this.couleur = couleur;
-		this.naissance = naissance;
 		this.poids = poids;
+	}
+	public Mouton(String nom, String couleur, String poids, String naissance) {
+		super();
+		this.nom = nom;
+		this.couleur = couleur;
+		this.poids = poids;
+		this.naissance = naissance;
 	}
 	public String getNom() {
 		return nom;
