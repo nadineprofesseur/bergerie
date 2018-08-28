@@ -47,7 +47,11 @@ public class VueAjouterMouton extends Application{
 	
 	public Mouton demanderMouton()
 	{
-		return null;
+		Mouton mouton = new Mouton(this.valeurNom.getText(), 
+								this.valeurCouleur.getText(), 
+								this.valeurPoids.getText(), 
+								this.valeurNaissance.getText());
+		return mouton;
 	}
 
 }
