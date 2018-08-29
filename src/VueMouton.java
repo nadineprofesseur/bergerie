@@ -34,12 +34,7 @@ public class VueMouton extends Scene{
 		grilleMouton.add(new Label("Naissance : "), 0, 3);
 		grilleMouton.add(valeurNaissance, 1, 3);				
 			
-		panneau.getChildren().add(grilleMouton);
-		
-		//// TEST ////
-		Mouton mouton = new Mouton("Dolly", "Grise", "20 kg", "5 juin 2015");
-		this.afficherMouton(mouton); // Appel de ma fonction avant de la programmer (pour tester à mesure)
-		
+		panneau.getChildren().add(grilleMouton);		
 	}
 	
 	public void afficherMouton(Mouton mouton)
