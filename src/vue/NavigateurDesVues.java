@@ -2,6 +2,7 @@ package vue;
 import java.util.ArrayList;
 import java.util.List;
 
+import controleur.ControleurMouton;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import modele.Mouton;
@@ -14,8 +15,12 @@ public class NavigateurDesVues extends Application{
 	private VueListeMouton vueListeMouton;
 	private VueMouton vueMouton;
 	
+	private ControleurMouton controleur;
+	
 	public NavigateurDesVues() 
 	{
+		this.controleur = new ControleurMouton(this); // Inversion de la création car le framework instancie la vue dans un thread
+		
 		this.vueAjouterMouton = new VueAjouterMouton();
 		this.vueListeMouton = new VueListeMouton();
 		this.vueMouton = new VueMouton();
