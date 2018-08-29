@@ -5,16 +5,16 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class VueMouton extends Application{
+public class VueMouton extends Scene{
 
 	protected Label valeurNom;
 	protected Label valeurCouleur;
 	protected Label valeurPoids;
 	protected Label valeurNaissance;
 	
-	@Override
-	public void start(Stage stade) throws Exception {
-		Pane panneau = new Pane();	
+	public VueMouton() {
+		super(new Pane(),400,400);
+		Pane panneau = (Pane) this.getRoot();	
 		GridPane grilleMouton = new GridPane();
 
 		// https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/GridPane.html
@@ -35,8 +35,6 @@ public class VueMouton extends Application{
 		grilleMouton.add(valeurNaissance, 1, 3);				
 			
 		panneau.getChildren().add(grilleMouton);
-		stade.setScene(new Scene(panneau, 400, 400));
-		stade.show();
 		
 		//// TEST ////
 		Mouton mouton = new Mouton("Dolly", "Grise", "20 kg", "5 juin 2015");
