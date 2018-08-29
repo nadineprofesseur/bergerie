@@ -5,7 +5,8 @@ public class App {
 
 		//VueMouton.launch(VueMouton.class, parametres);
 		//VueListeMouton.launch(VueListeMouton.class, parametres);
-		VueAjouterMouton.launch(VueAjouterMouton.class, parametres);
+		//VueAjouterMouton.launch(VueAjouterMouton.class, parametres);
+		NavigateurDesVues.launch(NavigateurDesVues.class, parametres);
 	}
 
 }

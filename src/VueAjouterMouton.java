@@ -8,16 +8,16 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class VueAjouterMouton extends Application{
+public class VueAjouterMouton extends Scene {
 
 	protected TextField valeurNom;
 	protected TextField valeurCouleur;
 	protected TextField valeurPoids;
 	protected TextField valeurNaissance;
 	
-	@Override
-	public void start(Stage stade) throws Exception {
-		VBox panneau = new VBox();	
+	public VueAjouterMouton()  {
+		super(new VBox(), 400, 400);
+		VBox panneau = (VBox) this.getRoot();
 		GridPane grilleMouton = new GridPane();
 
 		// https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/GridPane.html
@@ -41,8 +41,6 @@ public class VueAjouterMouton extends Application{
 		panneau.getChildren().add(new Label("Ajouter un mouton")); // Todo : créer un sous-type de Label ou Text pour les titres
 		panneau.getChildren().add(grilleMouton);
 		panneau.getChildren().add(new Button("Enregistrer"));
-		stade.setScene(new Scene(panneau, 400, 400));
-		stade.show();		
 	}
 	
 	public Mouton demanderMouton()
