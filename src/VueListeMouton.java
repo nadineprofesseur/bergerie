@@ -8,19 +8,16 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class VueListeMouton extends Application {
+public class VueListeMouton extends Scene {
 
 	protected GridPane grilleMoutons;
 	
-	@Override
-	public void start(Stage stade) throws Exception {
-		Pane panneau = new Pane();	
+	public VueListeMouton() {
+		super(new Pane(), 400,400);
+		Pane panneau = (Pane) this.getRoot();
 		grilleMoutons = new GridPane();
 		
-		
 		panneau.getChildren().add(grilleMoutons);
-		stade.setScene(new Scene(panneau, 400, 400));
-		stade.show();		
 		
 		/// TEST ///
 		List listeMoutonsTest = new ArrayList<Mouton>();
