@@ -10,6 +10,11 @@ public class ControleurMouton {
 	{
 		this.navigateur = navigateur;
 		System.out.println("Initialisation du controleur");
+		
+		this.navigateur.naviguerVersVueListeMouton();
+		this.navigateur.naviguerVersVueMouton();
+		this.navigateur.naviguerVersVueAjouterMouton();
+
 	}
 
 }

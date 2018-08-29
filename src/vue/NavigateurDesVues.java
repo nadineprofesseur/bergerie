@@ -18,9 +18,7 @@ public class NavigateurDesVues extends Application{
 	private ControleurMouton controleur;
 	
 	public NavigateurDesVues() 
-	{
-		this.controleur = new ControleurMouton(this); // Inversion de la création car le framework instancie la vue dans un thread
-		
+	{		
 		this.vueAjouterMouton = new VueAjouterMouton();
 		this.vueListeMouton = new VueListeMouton();
 		this.vueMouton = new VueMouton();
@@ -45,10 +43,7 @@ public class NavigateurDesVues extends Application{
 		this.stade.setScene(this.vueListeMouton);
 		this.stade.show();
 	
-		//// TEST ////
-		this.naviguerVersVueListeMouton();
-		this.naviguerVersVueMouton();
-		this.naviguerVersVueAjouterMouton();
+		this.controleur = new ControleurMouton(this); // Inversion de la création car le framework instancie la vue dans un thread
 
 	}	
 	
