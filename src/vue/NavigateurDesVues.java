@@ -15,7 +15,7 @@ public class NavigateurDesVues extends Application{
 	private VueListeMouton vueListeMouton = null;
 	private VueMouton vueMouton = null;
 	
-	private ControleurMouton controleur;
+	private ControleurMouton controleur = null;
 	
 	public NavigateurDesVues() 
 	{		
@@ -31,8 +31,8 @@ public class NavigateurDesVues extends Application{
 		this.stade.setScene(this.vueListeMouton);
 		this.stade.show();
 	
-		this.controleur = new ControleurMouton(this); // Inversion de la création car le framework instancie la vue dans un thread
-
+		this.controleur = ControleurMouton.getInstance();
+		this.controleur.activerVues(this);
 	}	
 	
 	public VueAjouterMouton getVueAjouterMouton() {
