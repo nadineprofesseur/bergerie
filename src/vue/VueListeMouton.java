@@ -1,3 +1,4 @@
+package vue;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import modele.Mouton;
 
 public class VueListeMouton extends Scene {
 

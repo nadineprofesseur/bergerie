@@ -1,3 +1,4 @@
+import vue.NavigateurDesVues;
 
 public class App {
 
