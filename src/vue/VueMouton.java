@@ -15,9 +15,8 @@ public class VueMouton extends Scene{
 	protected Label valeurNaissance;
 	
 	public VueMouton() {
-		super(new Pane(),400,400);
-		Pane panneau = (Pane) this.getRoot();	
-		GridPane grilleMouton = new GridPane();
+		super(new GridPane(),400,400);
+		GridPane grilleMouton = (GridPane) this.getRoot();
 
 		// https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/GridPane.html
 		valeurNom = new Label("");
@@ -35,8 +34,6 @@ public class VueMouton extends Scene{
 		valeurNaissance = new Label("");
 		grilleMouton.add(new Label("Naissance : "), 0, 3);
 		grilleMouton.add(valeurNaissance, 1, 3);				
-			
-		panneau.getChildren().add(grilleMouton);		
 	}
 	
 	public void afficherMouton(Mouton mouton)

@@ -15,11 +15,8 @@ public class VueListeMouton extends Scene {
 	protected GridPane grilleMoutons;
 	
 	public VueListeMouton() {
-		super(new Pane(), 400,400);
-		Pane panneau = (Pane) this.getRoot();
-		grilleMoutons = new GridPane();
-		
-		panneau.getChildren().add(grilleMoutons);		
+		super(new GridPane(), 400,400);
+		grilleMoutons = (GridPane) this.getRoot();
 	}
 	
 	public void afficherListeMouton(List<Mouton> listeMoutons)
