@@ -28,7 +28,8 @@ public class NavigateurDesVues extends Application{
 	@Override
 	public void start(Stage stade) throws Exception {
 		this.stade = stade;
-		this.stade.setScene(this.vueListeMouton);
+		
+		this.stade.setScene(null);
 		this.stade.show();
 	
 		this.controleur = ControleurMouton.getInstance();

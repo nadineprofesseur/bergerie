@@ -44,7 +44,7 @@ public class ControleurMouton {
 		
 		this.navigateur.naviguerVersVueListeMouton();		
 				
-		//this.navigateur.naviguerVersVueAjouterMouton();
+		this.navigateur.naviguerVersVueAjouterMouton();
 	}
 	
 	// SINGLETON DEBUT
