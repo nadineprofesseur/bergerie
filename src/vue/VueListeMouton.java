@@ -24,6 +24,8 @@ public class VueListeMouton extends Scene {
 	
 	public void afficherListeMouton(List<Mouton> listeMoutons)
 	{
+		this.grilleMoutons.getChildren().clear();
+		
 		int numero = 0;
 		this.grilleMoutons.add(new Label("Nom"), 0, numero);
 		this.grilleMoutons.add(new Label("Naissance"), 1, numero);			
