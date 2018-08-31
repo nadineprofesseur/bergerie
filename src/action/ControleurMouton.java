@@ -1,9 +1,9 @@
-package controleur;
+package action;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import accesseur.MoutonDAO;
+import donnee.MoutonDAO;
 import modele.Mouton;
 import vue.NavigateurDesVues;
 import vue.VueAjouterMouton;
