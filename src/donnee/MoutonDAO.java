@@ -1,7 +1,10 @@
 package donnee;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,10 +36,22 @@ public class MoutonDAO {
 		}
 		
 		try {
-			DriverManager.getConnection(BASEDEDONNEES_URL, BASEDEDONNEES_USAGER, BASEDEDONNEES_MOTDEPASSE);
+			Connection connection = DriverManager.getConnection(BASEDEDONNEES_URL, BASEDEDONNEES_USAGER, BASEDEDONNEES_MOTDEPASSE);
+			
+			Statement requeteListeMoutons = connection.createStatement();
+			ResultSet curseurListeMoutons = requeteListeMoutons.executeQuery("SELECT * FROM mouton");
+			curseurListeMoutons.next();
+			String nom = curseurListeMoutons.getString("nom");
+			String couleur = curseurListeMoutons.getString("couleur");
+			String poids = curseurListeMoutons.getString("poids");
+			String naissance = curseurListeMoutons.getString("naissance");
+			System.out.println("Mouton " + nom + " née le " + naissance + " : " + poids + "kg " + couleur);
+						
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		
 		
 		return this.simulerListerMoutons();
 	}
