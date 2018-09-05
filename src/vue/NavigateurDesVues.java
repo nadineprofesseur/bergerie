@@ -20,7 +20,6 @@ public class NavigateurDesVues extends Application{
 		this.vueListeMouton = new VueListeMouton();
 		this.vueMouton = new VueMouton();
 	}
-	
 
 	@Override
 	public void start(Stage stade) throws Exception {

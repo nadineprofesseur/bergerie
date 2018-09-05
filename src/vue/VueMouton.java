@@ -1,4 +1,5 @@
 package vue;
+import action.ControleurMouton;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -10,6 +11,8 @@ public class VueMouton extends Scene{
 	protected Label valeurCouleur;
 	protected Label valeurPoids;
 	protected Label valeurNaissance;
+	
+	private ControleurMouton controleur = null;	
 	
 	public VueMouton() {
 		super(new GridPane(),400,400);
@@ -39,6 +42,10 @@ public class VueMouton extends Scene{
 		this.valeurCouleur.setText(mouton.getCouleur());
 		this.valeurPoids.setText(mouton.getPoids());
 		this.valeurNaissance.setText(mouton.getNaissance());	
+	}
+	
+	public void setControleur(ControleurMouton controleur) {
+		this.controleur = controleur;
 	}
 
 }

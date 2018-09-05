@@ -1,6 +1,7 @@
 package vue;
 import java.util.List;
 
+import action.ControleurMouton;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,6 +11,9 @@ import modele.Mouton;
 public class VueListeMouton extends Scene {
 
 	protected GridPane grilleMoutons;
+	
+	private ControleurMouton controleur = null;
+	
 	
 	public VueListeMouton() {
 		super(new GridPane(), 400,400);
@@ -30,6 +34,10 @@ public class VueListeMouton extends Scene {
 			this.grilleMoutons.add(new Label(mouton.getNaissance()), 1, numero);			
 			this.grilleMoutons.add(new Button("Editer"), 2, numero);
 		}
+	}
+
+	public void setControleur(ControleurMouton controleur) {
+		this.controleur = controleur;
 	}
 
 }

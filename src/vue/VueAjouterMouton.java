@@ -1,4 +1,5 @@
 package vue;
+import action.ControleurMouton;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,6 +14,8 @@ public class VueAjouterMouton extends Scene {
 	protected TextField valeurCouleur;
 	protected TextField valeurPoids;
 	protected TextField valeurNaissance;
+	
+	private ControleurMouton controleur = null;
 	
 	public VueAjouterMouton()  {
 		super(new VBox(), 400, 400);
@@ -50,5 +53,10 @@ public class VueAjouterMouton extends Scene {
 								this.valeurNaissance.getText());
 		return mouton;
 	}
+	
+	public void setControleur(ControleurMouton controleur) {
+		this.controleur = controleur;
+	}
+	
 
 }
