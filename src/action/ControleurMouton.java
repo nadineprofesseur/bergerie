@@ -15,10 +15,12 @@ public class ControleurMouton {
 	private VueAjouterMouton vueAjouterMouton = null;
 	private VueListeMouton vueListeMouton = null;
 	private VueMouton vueMouton = null;
-		
+	MoutonDAO moutonDAO = null;
+	
 	private ControleurMouton()
 	{
-		System.out.println("Initialisation du controleur");		
+		System.out.println("Initialisation du controleur");	
+		this.moutonDAO = new MoutonDAO();
 	}
 	
 	public void activerVues(NavigateurDesVues navigateur)
@@ -35,13 +37,12 @@ public class ControleurMouton {
 		this.navigateur.naviguerVersVueMouton();
 		
 		/// TEST ///
-		MoutonDAO moutonDAO = new MoutonDAO();
 		List<Mouton> listeMoutonsTest = moutonDAO.listerMoutons();
 		this.vueListeMouton.afficherListeMouton(listeMoutonsTest); // Appel de ma fonction avant de la programmer (pour tester à mesure)
 		
 		this.navigateur.naviguerVersVueListeMouton();		
 				
-		//this.navigateur.naviguerVersVueAjouterMouton();
+		this.navigateur.naviguerVersVueAjouterMouton();
 	}
 	
 	// SINGLETON DEBUT
@@ -53,4 +54,13 @@ public class ControleurMouton {
 	}
 	// SINGLETON FINI
 
+	public void notifierEnregistrerMouton()
+	{
+		System.out.println("ControleurMouton.notifierEnregistrerMouton()");
+		Mouton mouton = this.navigateur.getVueAjouterMouton().demanderMouton();
+		//this.moutonDAO.ajouterMouton(mouton);
+		this.navigateur.naviguerVersVueListeMouton();
+	}
+	
+	
 }

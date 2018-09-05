@@ -1,5 +1,7 @@
 package vue;
 import action.ControleurMouton;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,12 +18,23 @@ public class VueAjouterMouton extends Scene {
 	protected TextField valeurNaissance;
 	
 	private ControleurMouton controleur = null;
+	protected Button actionEnregistrerMouton = null;
 	
 	public VueAjouterMouton()  {
 		super(new VBox(), 400, 400);
 		VBox panneau = (VBox) this.getRoot();
 		GridPane grilleMouton = new GridPane();
+		this.actionEnregistrerMouton = new Button("Enregistrer");
+		
+		this.actionEnregistrerMouton.setOnAction(new EventHandler<ActionEvent>() {
 
+			@Override
+			public void handle(ActionEvent arg0) {
+				
+				controleur.notifierEnregistrerMouton();
+				
+			}});
+		
 		// https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/GridPane.html
 		valeurNom = new TextField();
 		grilleMouton.add(new Label("Nom : "), 0, 0);
@@ -42,7 +55,7 @@ public class VueAjouterMouton extends Scene {
 		// Todo : retirer les textes magiques
 		panneau.getChildren().add(new Label("Ajouter un mouton")); // Todo : créer un sous-type de Label ou Text pour les titres
 		panneau.getChildren().add(grilleMouton);
-		panneau.getChildren().add(new Button("Enregistrer"));
+		panneau.getChildren().add(this.actionEnregistrerMouton);
 	}
 	
 	public Mouton demanderMouton()
