@@ -30,6 +30,9 @@ public class NavigateurDesVues extends Application{
 	
 		this.controleur = ControleurMouton.getInstance();
 		this.controleur.activerVues(this);
+		this.vueAjouterMouton.setControleur(controleur);
+		this.vueListeMouton.setControleur(controleur);
+		this.vueMouton.setControleur(controleur);
 	}	
 	
 	public VueAjouterMouton getVueAjouterMouton() {
