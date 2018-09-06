@@ -87,6 +87,21 @@ public class MoutonDAO {
 		}
 	}
 	
+	public void modifierMouton(Mouton mouton)
+	{
+		System.out.println("MoutonDAO.modifierMouton()");
+		try {
+			Statement requeteModifierMouton = connection.createStatement();
+			// TODO factoriser chaines magiques dans des constantes - si possible interfaces
+			// TODO changer pour requete preparee
+			String SQL_MODIFIER_MOUTON = "UPDATE mouton SET nom = '"+mouton.getNom()+"', couleur = '"+mouton.getCouleur()+"', poids = '"+mouton.getPoids()+"', naissance = '"+mouton.getNaissance()+"' WHERE id = " + mouton.getId();
+			System.out.println("SQL : " + SQL_MODIFIER_MOUTON);
+			requeteModifierMouton.execute(SQL_MODIFIER_MOUTON);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public Mouton rapporterMouton(int idMouton)
 	{
 		Statement requeteMouton;

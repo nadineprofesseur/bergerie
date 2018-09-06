@@ -20,6 +20,8 @@ public class VueEditerMouton extends Scene {
 	private ControleurMouton controleur = null;
 	protected Button actionEnregistrerMouton = null;
 	
+	private int idMouton = 0;
+	
 	public VueEditerMouton()  {
 		super(new VBox(), 400, 400);
 		VBox panneau = (VBox) this.getRoot();
@@ -60,6 +62,7 @@ public class VueEditerMouton extends Scene {
 	
 	public void afficherMouton(Mouton mouton)
 	{
+		this.idMouton = mouton.getId();
 		this.valeurNom.setText(mouton.getNom());
 		this.valeurCouleur.setText(mouton.getCouleur());
 		this.valeurPoids.setText(mouton.getPoids());
@@ -72,6 +75,7 @@ public class VueEditerMouton extends Scene {
 								this.valeurCouleur.getText(), 
 								this.valeurPoids.getText(), 
 								this.valeurNaissance.getText());
+		mouton.setId(idMouton);
 		return mouton;
 	}
 	

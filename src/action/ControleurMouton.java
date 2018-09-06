@@ -57,13 +57,22 @@ public class ControleurMouton {
 	}
 	// SINGLETON FINI
 
-	public void notifierEnregistrerMouton()
+	public void notifierEnregistrerNouveauMouton()
 	{
-		System.out.println("ControleurMouton.notifierEnregistrerMouton()");
+		System.out.println("ControleurMouton.notifierEnregistrerNouveauMouton()");
 		Mouton mouton = this.navigateur.getVueAjouterMouton().demanderMouton();
 		this.moutonDAO.ajouterMouton(mouton);
 		this.vueListeMouton.afficherListeMouton(this.moutonDAO.listerMoutons()); // TODO optimiser
 		this.navigateur.naviguerVersVueListeMouton();
+	}
+	
+	public void notifierEnregistrerMouton()
+	{
+		System.out.println("ControleurMouton.notifierEnregistrerMouton()");
+		Mouton mouton = this.navigateur.getVueEditerMouton().demanderMouton();
+		this.moutonDAO.modifierMouton(mouton);
+		this.vueListeMouton.afficherListeMouton(this.moutonDAO.listerMoutons()); // TODO optimiser
+		this.navigateur.naviguerVersVueListeMouton();		
 	}
 	
 	public void notifierNaviguerAjouterMouton()
