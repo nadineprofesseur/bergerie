@@ -32,10 +32,16 @@ public class VueListeMouton extends Scene {
 		this.grilleMoutons.add(new Label("Naissance"), 1, numero);	
 		for(Mouton mouton : listeMoutons)
 		{
+			Button actionEditerMouton = new Button("Editer");
+			actionEditerMouton.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent arg0) {
+					controleur.notifierNaviguerEditerMouton();
+				}});
 			numero++;
 			this.grilleMoutons.add(new Label(mouton.getNom()), 0, numero);
 			this.grilleMoutons.add(new Label(mouton.getNaissance()), 1, numero);			
-			this.grilleMoutons.add(new Button("Editer"), 2, numero);
+			this.grilleMoutons.add(actionEditerMouton, 2, numero);
 		}
 		
 		this.actionNaviguerAjouterMouton.setOnAction(new EventHandler<ActionEvent>() 

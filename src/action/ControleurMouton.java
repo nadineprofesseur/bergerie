@@ -69,5 +69,12 @@ public class ControleurMouton {
 		this.navigateur.naviguerVersVueAjouterMouton();
 	}
 	
+	public void notifierNaviguerEditerMouton()
+	{
+		System.out.println("ControleurMouton.notifierEditerMouton()");
+		this.navigateur.naviguerVersVueEditerMouton();
+		
+	}
+	
 	
 }

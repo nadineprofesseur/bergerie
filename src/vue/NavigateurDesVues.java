@@ -8,17 +8,19 @@ public class NavigateurDesVues extends Application{
 	
 	private Stage stade;
 	
-	private VueAjouterMouton vueAjouterMouton = null;
 	private VueListeMouton vueListeMouton = null;
 	private VueMouton vueMouton = null;
+	private VueAjouterMouton vueAjouterMouton = null;
+	private VueEditerMouton vueEditerMouton = null;
 	
 	private ControleurMouton controleur = null;
 	
 	public NavigateurDesVues() 
 	{		
-		this.vueAjouterMouton = new VueAjouterMouton();
 		this.vueListeMouton = new VueListeMouton();
 		this.vueMouton = new VueMouton();
+		this.vueAjouterMouton = new VueAjouterMouton();
+		this.vueEditerMouton = new VueEditerMouton();
 	}
 
 	@Override
@@ -30,21 +32,26 @@ public class NavigateurDesVues extends Application{
 	
 		this.controleur = ControleurMouton.getInstance();
 		this.controleur.activerVues(this);
-		this.vueAjouterMouton.setControleur(controleur);
 		this.vueListeMouton.setControleur(controleur);
 		this.vueMouton.setControleur(controleur);
+		this.vueAjouterMouton.setControleur(controleur);
+		this.vueEditerMouton.setControleur(controleur);
 	}	
 	
-	public VueAjouterMouton getVueAjouterMouton() {
-		return vueAjouterMouton;
-	}
-
 	public VueListeMouton getVueListeMouton() {
 		return vueListeMouton;
 	}
 
 	public VueMouton getVueMouton() {
 		return vueMouton;
+	}
+	
+	public VueAjouterMouton getVueAjouterMouton() {
+		return vueAjouterMouton;
+	}
+
+	public VueEditerMouton getVueEditerMouton(){
+		return this.vueEditerMouton;
 	}
 	
 	public void naviguerVersVueMouton() {
@@ -64,5 +71,10 @@ public class NavigateurDesVues extends Application{
 		stade.show();				
 	}
 
+	public void naviguerVersVueEditerMouton()
+	{
+		stade.setScene(this.vueEditerMouton);
+		stade.show();				
+	}
 	
 }
