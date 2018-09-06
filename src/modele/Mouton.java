@@ -2,11 +2,18 @@ package modele;
 
 public class Mouton {
 
+	protected int id;
 	protected String nom;
 	protected String couleur;
 	protected String poids;
 	protected String naissance;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public Mouton(String nom) {
 		super();
 		this.nom = nom;

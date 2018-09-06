@@ -35,8 +35,8 @@ public class VueListeMouton extends Scene {
 			Button actionEditerMouton = new Button("Editer");
 			actionEditerMouton.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
-				public void handle(ActionEvent arg0) {
-					controleur.notifierNaviguerEditerMouton();
+				public void handle(ActionEvent a) {
+					controleur.notifierNaviguerEditerMouton(mouton.getId()); // TODO ameliorer ceci pour respecter architecture cible = pas de parametre dans les notifications au controleur
 				}});
 			numero++;
 			this.grilleMoutons.add(new Label(mouton.getNom()), 0, numero);

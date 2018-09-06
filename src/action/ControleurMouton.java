@@ -72,11 +72,11 @@ public class ControleurMouton {
 		this.navigateur.naviguerVersVueAjouterMouton();
 	}
 	
-	public void notifierNaviguerEditerMouton()
+	public void notifierNaviguerEditerMouton(int idMouton)
 	{
-		System.out.println("ControleurMouton.notifierEditerMouton()");
-		Mouton moutonTest = new Mouton("Dolly", "Grise", "20 kg", "5 juin 2015");
-		this.vueEditerMouton.afficherMouton(moutonTest);
+		System.out.println("ControleurMouton.notifierEditerMouton("+idMouton+")");
+		// savoir par la vue liste quel numero de mouton a ete clique
+		this.vueEditerMouton.afficherMouton(this.moutonDAO.rapporterMouton(idMouton));
 		this.navigateur.naviguerVersVueEditerMouton();
 		
 	}

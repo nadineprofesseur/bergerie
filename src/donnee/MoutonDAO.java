@@ -53,12 +53,14 @@ public class MoutonDAO {
 			ResultSet curseurListeMoutons = requeteListeMoutons.executeQuery("SELECT * FROM mouton");
 			while(curseurListeMoutons.next())
 			{
+				int id = curseurListeMoutons.getInt("id");
 				String nom = curseurListeMoutons.getString("nom");
 				String couleur = curseurListeMoutons.getString("couleur");
 				String poids = curseurListeMoutons.getString("poids");
 				String naissance = curseurListeMoutons.getString("naissance");
 				System.out.println("Mouton " + nom + " née le " + naissance + " : " + poids + "kg " + couleur);
 				Mouton mouton = new Mouton(nom, couleur, poids, naissance);
+				mouton.setId(id);
 				listeMoutons.add(mouton);
 			}
 		} catch (SQLException e) {
@@ -74,6 +76,7 @@ public class MoutonDAO {
 		System.out.println("MoutonDAO.ajouterMouton()");
 		try {
 			Statement requeteAjouterMouton = connection.createStatement();
+			// TODO factoriser chaines magiques dans des constantes - si possible interfaces
 			// TODO changer pour requete preparee
 			String sqlAjouterMouton = "INSERT into mouton(nom, couleur, poids, naissance) VALUES('"+mouton.getNom()+"','"+mouton.getCouleur()+"','"+mouton.getPoids()+"','"+mouton.getNaissance()+"')";
 			System.out.println("SQL : " + sqlAjouterMouton);
@@ -82,6 +85,31 @@ public class MoutonDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+	}
+	
+	public Mouton rapporterMouton(int idMouton)
+	{
+		Statement requeteMouton;
+		try {
+			requeteMouton = connection.createStatement();
+			// TODO factoriser chaines magiques dans des constantes - si possible interfaces
+			// TODO changer pour requete preparee
+			String SQL_RAPPORTER_MOUTON = "SELECT * FROM mouton WHERE id = " + idMouton;
+			System.out.println(SQL_RAPPORTER_MOUTON);
+			ResultSet curseurMouton = requeteMouton.executeQuery(SQL_RAPPORTER_MOUTON);
+			curseurMouton.next();
+			int id = curseurMouton.getInt("id");
+			String nom = curseurMouton.getString("nom");
+			String couleur = curseurMouton.getString("couleur");
+			String poids = curseurMouton.getString("poids");
+			String naissance = curseurMouton.getString("naissance");
+			System.out.println("Mouton " + nom + " née le " + naissance + " : " + poids + "kg " + couleur);
+			Mouton mouton = new Mouton(nom, couleur, poids, naissance);
+			mouton.setId(id);
+			return mouton;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
