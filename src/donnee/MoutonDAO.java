@@ -21,25 +21,34 @@ public class MoutonDAO {
 		listeMoutonsTest.add(new Mouton("Cheese", "Jaune", "20 kg", "5 septembre 2015"));
 		return listeMoutonsTest;
 	}
-	public List<Mouton> listerMoutons()
+	
+	private static String BASEDEDONNEES_DRIVER = "org.postgresql.Driver";
+	private static String BASEDEDONNEES_URL = "jdbc:postgresql://localhost:5432/bergerie";
+	private static String BASEDEDONNEES_USAGER = "postgres";
+	private static String BASEDEDONNEES_MOTDEPASSE = "test";	
+	private Connection connection = null;
+	
+	public MoutonDAO()
 	{
-		
-		String BASEDEDONNEES_DRIVER = "org.postgresql.Driver";
-		String BASEDEDONNEES_URL = "jdbc:postgresql://localhost:5432/bergerie";
-		String BASEDEDONNEES_USAGER = "postgres";
-		String BASEDEDONNEES_MOTDEPASSE = "test";
-		
 		try {
 			Class.forName(BASEDEDONNEES_DRIVER);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
-		List<Mouton> listeMoutons =  new ArrayList<Mouton>();
 		try {
-			Connection connection = DriverManager.getConnection(BASEDEDONNEES_URL, BASEDEDONNEES_USAGER, BASEDEDONNEES_MOTDEPASSE);
-			
-			Statement requeteListeMoutons = connection.createStatement();
+			connection = DriverManager.getConnection(BASEDEDONNEES_URL, BASEDEDONNEES_USAGER, BASEDEDONNEES_MOTDEPASSE);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public List<Mouton> listerMoutons()
+	{
+
+		List<Mouton> listeMoutons =  new ArrayList<Mouton>();			
+		Statement requeteListeMoutons;
+		try {
+			requeteListeMoutons = connection.createStatement();
 			ResultSet curseurListeMoutons = requeteListeMoutons.executeQuery("SELECT * FROM mouton");
 			while(curseurListeMoutons.next())
 			{
@@ -51,11 +60,10 @@ public class MoutonDAO {
 				Mouton mouton = new Mouton(nom, couleur, poids, naissance);
 				listeMoutons.add(mouton);
 			}
-						
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+				
 		//return this.simulerListerMoutons();
 		return listeMoutons;
 	}
