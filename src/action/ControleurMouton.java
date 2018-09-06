@@ -42,7 +42,7 @@ public class ControleurMouton {
 		
 		this.navigateur.naviguerVersVueListeMouton();		
 				
-		this.navigateur.naviguerVersVueAjouterMouton();
+		//this.navigateur.naviguerVersVueAjouterMouton();
 	}
 	
 	// SINGLETON DEBUT
@@ -59,7 +59,14 @@ public class ControleurMouton {
 		System.out.println("ControleurMouton.notifierEnregistrerMouton()");
 		Mouton mouton = this.navigateur.getVueAjouterMouton().demanderMouton();
 		this.moutonDAO.ajouterMouton(mouton);
+		this.vueListeMouton.afficherListeMouton(this.moutonDAO.listerMoutons()); // TODO optimiser
 		this.navigateur.naviguerVersVueListeMouton();
+	}
+	
+	public void notifierNaviguerAjouterMouton()
+	{
+		System.out.println("ControleurMouton.notifierNaviguerAjouterMouton()");
+		this.navigateur.naviguerVersVueAjouterMouton();
 	}
 	
 	
