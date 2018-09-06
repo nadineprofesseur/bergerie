@@ -58,6 +58,14 @@ public class VueEditerMouton extends Scene {
 		panneau.getChildren().add(this.actionEnregistrerMouton);
 	}
 	
+	public void afficherMouton(Mouton mouton)
+	{
+		this.valeurNom.setText(mouton.getNom());
+		this.valeurCouleur.setText(mouton.getCouleur());
+		this.valeurPoids.setText(mouton.getPoids());
+		this.valeurNaissance.setText(mouton.getNaissance());
+	}
+	
 	public Mouton demanderMouton()
 	{
 		Mouton mouton = new Mouton(this.valeurNom.getText(), 

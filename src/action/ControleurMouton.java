@@ -6,15 +6,17 @@ import donnee.MoutonDAO;
 import modele.Mouton;
 import vue.NavigateurDesVues;
 import vue.VueAjouterMouton;
+import vue.VueEditerMouton;
 import vue.VueListeMouton;
 import vue.VueMouton;
 
 public class ControleurMouton {
 	
 	private NavigateurDesVues navigateur;
-	private VueAjouterMouton vueAjouterMouton = null;
 	private VueListeMouton vueListeMouton = null;
 	private VueMouton vueMouton = null;
+	private VueAjouterMouton vueAjouterMouton = null;
+	private VueEditerMouton vueEditerMouton = null;
 	MoutonDAO moutonDAO = null;
 	
 	private ControleurMouton()
@@ -29,6 +31,7 @@ public class ControleurMouton {
 		this.vueAjouterMouton = navigateur.getVueAjouterMouton();
 		this.vueMouton = navigateur.getVueMouton();
 		this.vueListeMouton = navigateur.getVueListeMouton();
+		this.vueEditerMouton = navigateur.getVueEditerMouton();
 						
 		//// TEST ////
 		Mouton mouton = new Mouton("Dolly", "Grise", "20 kg", "5 juin 2015");
@@ -72,6 +75,8 @@ public class ControleurMouton {
 	public void notifierNaviguerEditerMouton()
 	{
 		System.out.println("ControleurMouton.notifierEditerMouton()");
+		Mouton moutonTest = new Mouton("Dolly", "Grise", "20 kg", "5 juin 2015");
+		this.vueEditerMouton.afficherMouton(moutonTest);
 		this.navigateur.naviguerVersVueEditerMouton();
 		
 	}
