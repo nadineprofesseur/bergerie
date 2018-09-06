@@ -58,7 +58,7 @@ public class ControleurMouton {
 	{
 		System.out.println("ControleurMouton.notifierEnregistrerMouton()");
 		Mouton mouton = this.navigateur.getVueAjouterMouton().demanderMouton();
-		//this.moutonDAO.ajouterMouton(mouton);
+		this.moutonDAO.ajouterMouton(mouton);
 		this.navigateur.naviguerVersVueListeMouton();
 	}
 	

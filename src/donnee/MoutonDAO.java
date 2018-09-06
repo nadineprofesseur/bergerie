@@ -49,6 +49,7 @@ public class MoutonDAO {
 		Statement requeteListeMoutons;
 		try {
 			requeteListeMoutons = connection.createStatement();
+			// TODO factoriser chaines magiques dans des constantes - si possible interfaces
 			ResultSet curseurListeMoutons = requeteListeMoutons.executeQuery("SELECT * FROM mouton");
 			while(curseurListeMoutons.next())
 			{
@@ -66,5 +67,21 @@ public class MoutonDAO {
 				
 		//return this.simulerListerMoutons();
 		return listeMoutons;
+	}
+	
+	public void ajouterMouton(Mouton mouton)
+	{
+		System.out.println("MoutonDAO.ajouterMouton()");
+		try {
+			Statement requeteAjouterMouton = connection.createStatement();
+			// TODO changer pour requete preparee
+			String sqlAjouterMouton = "INSERT into mouton(nom, couleur, poids, naissance) VALUES('"+mouton.getNom()+"','"+mouton.getCouleur()+"','"+mouton.getPoids()+"','"+mouton.getNaissance()+"')";
+			System.out.println("SQL : " + sqlAjouterMouton);
+			requeteAjouterMouton.execute(sqlAjouterMouton);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }
