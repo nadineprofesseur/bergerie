@@ -32,7 +32,7 @@ public class DistinctionDAO {
 		}
 	}
 	
-	public List<Distinction> listerDistinctions()
+	public List<Distinction> listerDistinctions(int idMouton)
 	{
 		System.out.println("DistinctionDAO.listerDistinctions()");
 		List<Distinction> listeDistinctions =  new ArrayList<Distinction>();			
@@ -40,7 +40,7 @@ public class DistinctionDAO {
 		try {
 			requeteListeDistinctions = connection.createStatement();
 			// TODO factoriser chaines magiques dans des constantes - si possible interfaces
-			ResultSet curseurListeDistinctions = requeteListeDistinctions.executeQuery("SELECT * FROM distinction WHERE mouton = 2");
+			ResultSet curseurListeDistinctions = requeteListeDistinctions.executeQuery("SELECT * FROM distinction WHERE mouton = " + idMouton); // TODO requete preparee
 			while(curseurListeDistinctions.next())
 			{
 				int id = curseurListeDistinctions.getInt("id");
