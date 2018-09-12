@@ -52,7 +52,7 @@ public class ControleurMouton {
 				
 		//this.navigateur.naviguerVersVueAjouterMouton();
 		
-		this.vueEditerMouton.afficherListeDistinction(this.distinctionDAO.simulerListeDistinctions());
+		this.vueEditerMouton.afficherListeDistinction(this.distinctionDAO.listerDistinctions());
 		
 	}
 	
