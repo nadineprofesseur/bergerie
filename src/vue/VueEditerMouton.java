@@ -19,6 +19,7 @@ public class VueEditerMouton extends Scene {
 	
 	private ControleurMouton controleur = null;
 	protected Button actionEnregistrerMouton = null;
+	GridPane grilleListeDistinctions = new GridPane();
 	
 	private int idMouton = 0;
 	
@@ -53,11 +54,18 @@ public class VueEditerMouton extends Scene {
 		valeurNaissance = new TextField("");
 		grilleMouton.add(new Label("Naissance : "), 0, 3);
 		grilleMouton.add(valeurNaissance, 1, 3);				
-			
+	
+		
+		this.grilleListeDistinctions.add(new Label("Distinction 1"), 0, 0);
+		this.grilleListeDistinctions.add(new Label("Distinction 2"), 0, 1);
+		this.grilleListeDistinctions.add(new Label("Distinction 3"), 0, 2);
+		this.grilleListeDistinctions.add(new Label("Distinction 4"), 0, 3);
+		
 		// Todo : retirer les textes magiques
 		panneau.getChildren().add(new Label("Editer un mouton")); // Todo : créer un sous-type de Label ou Text pour les titres
 		panneau.getChildren().add(grilleMouton);
 		panneau.getChildren().add(this.actionEnregistrerMouton);
+		panneau.getChildren().add(grilleListeDistinctions);
 	}
 	
 	public void afficherMouton(Mouton mouton)
