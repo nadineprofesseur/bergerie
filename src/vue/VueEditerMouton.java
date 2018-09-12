@@ -59,20 +59,6 @@ public class VueEditerMouton extends Scene {
 		grilleMouton.add(new Label("Naissance : "), 0, 3);
 		grilleMouton.add(valeurNaissance, 1, 3);				
 	
-		// Données TEST - Mockup
-		List<Distinction> listeDistinctions = new ArrayList<Distinction>();
-		Distinction prix;
-		prix = new Distinction(2015, "Mouton le plus noir");
-		listeDistinctions.add(prix);
-		prix = new Distinction(2016, "Mouton le plus rapide");
-		listeDistinctions.add(prix);
-		prix = new Distinction(2017, "Mouton comique");
-		listeDistinctions.add(prix);
-		prix = new Distinction(2018, "Mouton obéissant");
-		listeDistinctions.add(prix);
-		// Fin données TEST
-		this.afficherListeDistinction(listeDistinctions);
-
 		// Todo : retirer les textes magiques
 		panneau.getChildren().add(new Label("Editer un mouton")); // Todo : créer un sous-type de Label ou Text pour les titres
 		panneau.getChildren().add(grilleMouton);

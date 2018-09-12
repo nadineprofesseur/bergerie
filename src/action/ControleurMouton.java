@@ -1,8 +1,10 @@
 package action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import donnee.MoutonDAO;
+import modele.Distinction;
 import modele.Mouton;
 import vue.NavigateurDesVues;
 import vue.VueAjouterMouton;
@@ -46,6 +48,21 @@ public class ControleurMouton {
 		this.navigateur.naviguerVersVueListeMouton();		
 				
 		//this.navigateur.naviguerVersVueAjouterMouton();
+		
+		// Données TEST - Mockup
+		List<Distinction> listeDistinctions = new ArrayList<Distinction>();
+		Distinction prix;
+		prix = new Distinction(2015, "Mouton le plus noir");
+		listeDistinctions.add(prix);
+		prix = new Distinction(2016, "Mouton le plus rapide");
+		listeDistinctions.add(prix);
+		prix = new Distinction(2017, "Mouton comique");
+		listeDistinctions.add(prix);
+		prix = new Distinction(2018, "Mouton obéissant");
+		listeDistinctions.add(prix);
+		// Fin données TEST
+		this.vueEditerMouton.afficherListeDistinction(listeDistinctions);
+		
 	}
 	
 	// SINGLETON DEBUT
