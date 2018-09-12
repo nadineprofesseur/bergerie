@@ -55,6 +55,42 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: distinction; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE distinction (
+    id integer NOT NULL,
+    annee integer,
+    titre text,
+    detail text,
+    mouton integer
+);
+
+
+ALTER TABLE distinction OWNER TO postgres;
+
+--
+-- Name: distinction_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE distinction_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE distinction_id_seq OWNER TO postgres;
+
+--
+-- Name: distinction_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE distinction_id_seq OWNED BY distinction.id;
+
+
+--
 -- Name: mouton; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -91,6 +127,13 @@ ALTER SEQUENCE mouton_id_seq OWNED BY mouton.id;
 
 
 --
+-- Name: distinction id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY distinction ALTER COLUMN id SET DEFAULT nextval('distinction_id_seq'::regclass);
+
+
+--
 -- Name: mouton id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -98,20 +141,44 @@ ALTER TABLE ONLY mouton ALTER COLUMN id SET DEFAULT nextval('mouton_id_seq'::reg
 
 
 --
+-- Data for Name: distinction; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Name: distinction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('distinction_id_seq', 1, false);
+
+
+--
 -- Data for Name: mouton; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO mouton VALUES ('Molly', 'Blanche', '20', '7 juillet 2018', 1);
+INSERT INTO mouton VALUES ('Dodo', 'Rose', '', '', 5);
+INSERT INTO mouton VALUES ('Marguerite', 'Tachetée', '10', '2 août 2017', 3);
 INSERT INTO mouton VALUES ('Dolly', 'Rousse', '20', '5 juin 2015', 2);
-INSERT INTO mouton VALUES ('Marguerite', 'Tachetée', '20', '2 août 2017', 3);
-INSERT INTO mouton VALUES ('allo', 'rose', '', '', 4);
+INSERT INTO mouton VALUES ('test', 'test', 'test', 'test', 13);
+INSERT INTO mouton VALUES ('Molly2', 'Blanche', '20', '7 juillet 2018', 1);
+INSERT INTO mouton VALUES ('alloallo', 'rose', '', '', 4);
+INSERT INTO mouton VALUES ('Coucou', 'Noir', '5', '2016', 6);
 
 
 --
 -- Name: mouton_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('mouton_id_seq', 4, true);
+SELECT pg_catalog.setval('mouton_id_seq', 13, true);
+
+
+--
+-- Name: distinction distinction_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY distinction
+    ADD CONSTRAINT distinction_pkey PRIMARY KEY (id);
 
 
 --
@@ -120,6 +187,21 @@ SELECT pg_catalog.setval('mouton_id_seq', 4, true);
 
 ALTER TABLE ONLY mouton
     ADD CONSTRAINT mouton_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: fki_one_mouton_to_many_distinction; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX fki_one_mouton_to_many_distinction ON distinction USING btree (mouton);
+
+
+--
+-- Name: distinction one_mouton_to_many_distinction; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY distinction
+    ADD CONSTRAINT one_mouton_to_many_distinction FOREIGN KEY (mouton) REFERENCES mouton(id);
 
 
 --
