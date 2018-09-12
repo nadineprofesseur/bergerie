@@ -1,4 +1,7 @@
 package vue;
+import java.util.ArrayList;
+import java.util.List;
+
 import action.ControleurMouton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import modele.Distinction;
 import modele.Mouton;
 
 public class VueEditerMouton extends Scene {
@@ -55,12 +59,29 @@ public class VueEditerMouton extends Scene {
 		grilleMouton.add(new Label("Naissance : "), 0, 3);
 		grilleMouton.add(valeurNaissance, 1, 3);				
 	
-		
-		this.grilleListeDistinctions.add(new Label("Distinction 1"), 0, 0);
-		this.grilleListeDistinctions.add(new Label("Distinction 2"), 0, 1);
-		this.grilleListeDistinctions.add(new Label("Distinction 3"), 0, 2);
-		this.grilleListeDistinctions.add(new Label("Distinction 4"), 0, 3);
-		
+		// Données TEST - Mockup
+		List<Distinction> listeDistinctions = new ArrayList<Distinction>();
+		Distinction prix;
+		prix = new Distinction(2015, "Mouton le plus noir");
+		listeDistinctions.add(prix);
+		prix = new Distinction(2016, "Mouton le plus rapide");
+		listeDistinctions.add(prix);
+		prix = new Distinction(2017, "Mouton comique");
+		listeDistinctions.add(prix);
+		prix = new Distinction(2018, "Mouton obéissant");
+		listeDistinctions.add(prix);
+		// Fin données TEST
+
+		int item = 0;
+		for(Distinction distinction : listeDistinctions)
+		{
+			this.grilleListeDistinctions.add(new Label(distinction.getAnnee() + ""), 0, item);
+			this.grilleListeDistinctions.add(new Label(distinction.getTitre()), 1, item);
+			this.grilleListeDistinctions.add(new Button("Éditer"), 2, item);
+			this.grilleListeDistinctions.add(new Button("Effacer"), 3, item);
+			item++;
+		}
+				
 		// Todo : retirer les textes magiques
 		panneau.getChildren().add(new Label("Editer un mouton")); // Todo : créer un sous-type de Label ou Text pour les titres
 		panneau.getChildren().add(grilleMouton);
