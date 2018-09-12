@@ -71,17 +71,8 @@ public class VueEditerMouton extends Scene {
 		prix = new Distinction(2018, "Mouton obéissant");
 		listeDistinctions.add(prix);
 		// Fin données TEST
+		this.afficherListeDistinction(listeDistinctions);
 
-		int item = 0;
-		for(Distinction distinction : listeDistinctions)
-		{
-			this.grilleListeDistinctions.add(new Label(distinction.getAnnee() + ""), 0, item);
-			this.grilleListeDistinctions.add(new Label(distinction.getTitre()), 1, item);
-			this.grilleListeDistinctions.add(new Button("Éditer"), 2, item);
-			this.grilleListeDistinctions.add(new Button("Effacer"), 3, item);
-			item++;
-		}
-				
 		// Todo : retirer les textes magiques
 		panneau.getChildren().add(new Label("Editer un mouton")); // Todo : créer un sous-type de Label ou Text pour les titres
 		panneau.getChildren().add(grilleMouton);
@@ -96,6 +87,19 @@ public class VueEditerMouton extends Scene {
 		this.valeurCouleur.setText(mouton.getCouleur());
 		this.valeurPoids.setText(mouton.getPoids());
 		this.valeurNaissance.setText(mouton.getNaissance());
+	}
+	
+	public void afficherListeDistinction(List<Distinction> listeDistinctions)
+	{
+		int item = 0;
+		for(Distinction distinction : listeDistinctions)
+		{
+			this.grilleListeDistinctions.add(new Label(distinction.getAnnee() + ""), 0, item);
+			this.grilleListeDistinctions.add(new Label(distinction.getTitre()), 1, item);
+			this.grilleListeDistinctions.add(new Button("Éditer"), 2, item);
+			this.grilleListeDistinctions.add(new Button("Effacer"), 3, item);
+			item++;
+		}		
 	}
 	
 	public Mouton demanderMouton()
