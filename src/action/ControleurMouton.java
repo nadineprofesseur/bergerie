@@ -3,6 +3,7 @@ package action;
 import java.util.ArrayList;
 import java.util.List;
 
+import donnee.DistinctionDAO;
 import donnee.MoutonDAO;
 import modele.Distinction;
 import modele.Mouton;
@@ -20,11 +21,13 @@ public class ControleurMouton {
 	private VueAjouterMouton vueAjouterMouton = null;
 	private VueEditerMouton vueEditerMouton = null;
 	MoutonDAO moutonDAO = null;
+	DistinctionDAO distinctionDAO = null;
 	
 	private ControleurMouton()
 	{
 		System.out.println("Initialisation du controleur");	
 		this.moutonDAO = new MoutonDAO();
+		distinctionDAO = new DistinctionDAO();
 	}
 	
 	public void activerVues(NavigateurDesVues navigateur)
@@ -49,19 +52,7 @@ public class ControleurMouton {
 				
 		//this.navigateur.naviguerVersVueAjouterMouton();
 		
-		// Données TEST - Mockup
-		List<Distinction> listeDistinctions = new ArrayList<Distinction>();
-		Distinction prix;
-		prix = new Distinction(2015, "Mouton le plus noir");
-		listeDistinctions.add(prix);
-		prix = new Distinction(2016, "Mouton le plus rapide");
-		listeDistinctions.add(prix);
-		prix = new Distinction(2017, "Mouton comique");
-		listeDistinctions.add(prix);
-		prix = new Distinction(2018, "Mouton obéissant");
-		listeDistinctions.add(prix);
-		// Fin données TEST
-		this.vueEditerMouton.afficherListeDistinction(listeDistinctions);
+		this.vueEditerMouton.afficherListeDistinction(this.distinctionDAO.simulerListeDistinctions());
 		
 	}
 	
