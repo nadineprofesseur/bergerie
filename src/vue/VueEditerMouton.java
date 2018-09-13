@@ -23,7 +23,8 @@ public class VueEditerMouton extends Scene {
 	
 	private ControleurMouton controleur = null;
 	protected Button actionEnregistrerMouton = null;
-	GridPane grilleListeDistinctions = new GridPane();
+	protected GridPane grilleListeDistinctions = new GridPane();
+	protected Button actionAjouterDistinction = null;
 	
 	private int idMouton = 0;
 	
@@ -31,6 +32,16 @@ public class VueEditerMouton extends Scene {
 		super(new VBox(), 400, 400);
 		VBox panneau = (VBox) this.getRoot();
 		GridPane grilleMouton = new GridPane();
+		
+		this.actionAjouterDistinction = new Button("Ajouter une distinction");
+		
+		this.actionAjouterDistinction.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO naviguer vers vue ajouter distinction
+			}
+		});
+		
 		this.actionEnregistrerMouton = new Button("Enregistrer");
 		
 		this.actionEnregistrerMouton.setOnAction(new EventHandler<ActionEvent>() {
@@ -64,6 +75,7 @@ public class VueEditerMouton extends Scene {
 		panneau.getChildren().add(grilleMouton);
 		panneau.getChildren().add(this.actionEnregistrerMouton);
 		panneau.getChildren().add(grilleListeDistinctions);
+		panneau.getChildren().add(this.actionAjouterDistinction);
 	}
 	
 	public void afficherMouton(Mouton mouton)
