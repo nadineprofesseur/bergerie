@@ -63,12 +63,16 @@ public class MoutonDAO {
 	{
 		System.out.println("MoutonDAO.ajouterMouton()");
 		try {
-			Statement requeteAjouterMouton = connection.createStatement();
+			String SQL_AJOUTER_MOUTON = "INSERT into mouton(nom, couleur, poids, naissance) VALUES(?,?,?,?)";
 			// TODO factoriser chaines magiques dans des constantes - si possible interfaces
-			// TODO changer pour requete preparee
-			String sqlAjouterMouton = "INSERT into mouton(nom, couleur, poids, naissance) VALUES('"+mouton.getNom()+"','"+mouton.getCouleur()+"','"+mouton.getPoids()+"','"+mouton.getNaissance()+"')";
-			System.out.println("SQL : " + sqlAjouterMouton);
-			requeteAjouterMouton.execute(sqlAjouterMouton);
+			PreparedStatement requeteAjouterMouton = connection.prepareStatement(SQL_AJOUTER_MOUTON);
+			requeteAjouterMouton.setString(1, mouton.getNom());
+			requeteAjouterMouton.setString(2, mouton.getCouleur());
+			requeteAjouterMouton.setString(3, mouton.getPoids());
+			requeteAjouterMouton.setString(4, mouton.getNaissance());
+			
+			System.out.println("SQL : " + SQL_AJOUTER_MOUTON);
+			requeteAjouterMouton.execute();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -95,9 +99,9 @@ public class MoutonDAO {
 		PreparedStatement requeteMouton;
 		try {
 			String SQL_RAPPORTER_MOUTON = "SELECT * FROM mouton WHERE id = ?";
+			// TODO factoriser chaines magiques dans des constantes - si possible interfaces
 			requeteMouton = connection.prepareStatement(SQL_RAPPORTER_MOUTON);
 			requeteMouton.setInt(1, idMouton);
-			// TODO factoriser chaines magiques dans des constantes - si possible interfaces
 			System.out.println(SQL_RAPPORTER_MOUTON);
 			ResultSet curseurMouton = requeteMouton.executeQuery();
 			curseurMouton.next();
