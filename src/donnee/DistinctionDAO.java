@@ -12,7 +12,7 @@ import java.util.List;
 import modele.Distinction;
 import modele.Mouton;
 
-public class DistinctionDAO {
+public class DistinctionDAO implements DistinctionSQL {
 
 	private Connection connection = null;
 	
@@ -26,7 +26,6 @@ public class DistinctionDAO {
 		System.out.println("DistinctionDAO.listerDistinctions()");
 		List<Distinction> listeDistinctions =  new ArrayList<Distinction>();			
 		PreparedStatement requeteListeDistinctions;
-		String SQL_LISTER_DISTINCTIONS_PAR_MOUTON = "SELECT * FROM distinction WHERE mouton = ?";
 		// TODO factoriser chaines magiques dans des constantes - si possible interfaces
 		try {
 			requeteListeDistinctions = connection.prepareStatement(SQL_LISTER_DISTINCTIONS_PAR_MOUTON);
