@@ -11,6 +11,13 @@ import java.util.List;
 import modele.Mouton;
 
 public class MoutonDAO {
+		
+	private Connection connection = null;
+	
+	public MoutonDAO()
+	{
+		this.connection = BaseDeDonnees.getInstance().getConnection();		
+	}
 	
 	private List<Mouton> simulerListerMoutons()
 	{
@@ -20,27 +27,7 @@ public class MoutonDAO {
 		listeMoutonsTest.add(new Mouton("Arthurus", "Noire", "20 kg", "5 mars 2017"));
 		listeMoutonsTest.add(new Mouton("Cheese", "Jaune", "20 kg", "5 septembre 2015"));
 		return listeMoutonsTest;
-	}
-	
-	private static String BASEDEDONNEES_DRIVER = "org.postgresql.Driver";
-	private static String BASEDEDONNEES_URL = "jdbc:postgresql://localhost:5432/bergerie";
-	private static String BASEDEDONNEES_USAGER = "postgres";
-	private static String BASEDEDONNEES_MOTDEPASSE = "test";	
-	private Connection connection = null;
-	
-	public MoutonDAO()
-	{
-		try {
-			Class.forName(BASEDEDONNEES_DRIVER);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		try {
-			connection = DriverManager.getConnection(BASEDEDONNEES_URL, BASEDEDONNEES_USAGER, BASEDEDONNEES_MOTDEPASSE);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+	}	
 	
 	public List<Mouton> listerMoutons()
 	{
