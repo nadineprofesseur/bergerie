@@ -2,6 +2,7 @@ package donnee;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -91,14 +92,14 @@ public class MoutonDAO {
 	
 	public Mouton rapporterMouton(int idMouton)
 	{
-		Statement requeteMouton;
+		PreparedStatement requeteMouton;
 		try {
-			requeteMouton = connection.createStatement();
+			String SQL_RAPPORTER_MOUTON = "SELECT * FROM mouton WHERE id = ?";
+			requeteMouton = connection.prepareStatement(SQL_RAPPORTER_MOUTON);
+			requeteMouton.setInt(1, idMouton);
 			// TODO factoriser chaines magiques dans des constantes - si possible interfaces
-			// TODO changer pour requete preparee
-			String SQL_RAPPORTER_MOUTON = "SELECT * FROM mouton WHERE id = " + idMouton;
 			System.out.println(SQL_RAPPORTER_MOUTON);
-			ResultSet curseurMouton = requeteMouton.executeQuery(SQL_RAPPORTER_MOUTON);
+			ResultSet curseurMouton = requeteMouton.executeQuery();
 			curseurMouton.next();
 			int id = curseurMouton.getInt("id");
 			String nom = curseurMouton.getString("nom");
