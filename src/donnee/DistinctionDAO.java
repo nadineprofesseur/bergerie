@@ -20,7 +20,7 @@ public class DistinctionDAO {
 		this.connection = BaseDeDonnees.getInstance().getConnection();
 	}
 	
-	public List<Distinction> listerDistinctions(int idMouton)
+	public List<Distinction> listerDistinctionsParMouton(int idMouton)
 	{
 		System.out.println("DistinctionDAO.listerDistinctions()");
 		List<Distinction> listeDistinctions =  new ArrayList<Distinction>();			

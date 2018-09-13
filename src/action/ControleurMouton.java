@@ -94,7 +94,7 @@ public class ControleurMouton {
 		System.out.println("ControleurMouton.notifierEditerMouton("+idMouton+")");
 		// savoir par la vue liste quel numero de mouton a ete clique
 		this.vueEditerMouton.afficherMouton(this.moutonDAO.rapporterMouton(idMouton));
-		this.vueEditerMouton.afficherListeDistinction(this.distinctionDAO.listerDistinctions(idMouton));
+		this.vueEditerMouton.afficherListeDistinction(this.distinctionDAO.listerDistinctionsParMouton(idMouton));
 		this.navigateur.naviguerVersVueEditerMouton();
 		
 	}
