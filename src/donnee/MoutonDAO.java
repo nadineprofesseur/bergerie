@@ -11,7 +11,7 @@ import java.util.List;
 
 import modele.Mouton;
 
-public class MoutonDAO {
+public class MoutonDAO implements MoutonSQL{
 		
 	private Connection connection = null;
 	
@@ -37,8 +37,7 @@ public class MoutonDAO {
 		Statement requeteListeMoutons;
 		try {
 			requeteListeMoutons = connection.createStatement();
-			// TODO factoriser chaines magiques dans des constantes - si possible interfaces
-			ResultSet curseurListeMoutons = requeteListeMoutons.executeQuery("SELECT * FROM mouton");
+			ResultSet curseurListeMoutons = requeteListeMoutons.executeQuery(SQL_LISTER_MOUTONS);
 			while(curseurListeMoutons.next())
 			{
 				int id = curseurListeMoutons.getInt("id");
@@ -63,8 +62,6 @@ public class MoutonDAO {
 	{
 		System.out.println("MoutonDAO.ajouterMouton()");
 		try {
-			String SQL_AJOUTER_MOUTON = "INSERT into mouton(nom, couleur, poids, naissance) VALUES(?,?,?,?)";
-			// TODO factoriser chaines magiques dans des constantes - si possible interfaces
 			PreparedStatement requeteAjouterMouton = connection.prepareStatement(SQL_AJOUTER_MOUTON);
 			requeteAjouterMouton.setString(1, mouton.getNom());
 			requeteAjouterMouton.setString(2, mouton.getCouleur());
@@ -83,8 +80,6 @@ public class MoutonDAO {
 	{
 		System.out.println("MoutonDAO.modifierMouton()");
 		try {
-			String SQL_MODIFIER_MOUTON = "UPDATE mouton SET nom = ?, couleur = ?, poids = ?, naissance = ? WHERE id = ?";
-			// TODO factoriser chaines magiques dans des constantes - si possible interfaces
 			PreparedStatement requeteModifierMouton = connection.prepareStatement(SQL_MODIFIER_MOUTON);
 			requeteModifierMouton.setString(1, mouton.getNom());
 			requeteModifierMouton.setString(2, mouton.getCouleur());
@@ -103,8 +98,6 @@ public class MoutonDAO {
 	{
 		PreparedStatement requeteMouton;
 		try {
-			String SQL_RAPPORTER_MOUTON = "SELECT * FROM mouton WHERE id = ?";
-			// TODO factoriser chaines magiques dans des constantes - si possible interfaces
 			requeteMouton = connection.prepareStatement(SQL_RAPPORTER_MOUTON);
 			requeteMouton.setInt(1, idMouton);
 			System.out.println(SQL_RAPPORTER_MOUTON);
