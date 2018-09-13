@@ -20,8 +20,8 @@ public class ControleurMouton {
 	private VueMouton vueMouton = null;
 	private VueAjouterMouton vueAjouterMouton = null;
 	private VueEditerMouton vueEditerMouton = null;
-	MoutonDAO moutonDAO = null;
-	DistinctionDAO distinctionDAO = null;
+	private MoutonDAO moutonDAO = null;
+	private DistinctionDAO distinctionDAO = null;
 	
 	private ControleurMouton()
 	{
