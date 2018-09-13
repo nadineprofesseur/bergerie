@@ -2,6 +2,7 @@ package donnee;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,11 +25,13 @@ public class DistinctionDAO {
 	{
 		System.out.println("DistinctionDAO.listerDistinctions()");
 		List<Distinction> listeDistinctions =  new ArrayList<Distinction>();			
-		Statement requeteListeDistinctions;
+		PreparedStatement requeteListeDistinctions;
+		String SQL_LISTER_DISTINCTIONS_PAR_MOUTON = "SELECT * FROM distinction WHERE mouton = ?";
+		// TODO factoriser chaines magiques dans des constantes - si possible interfaces
 		try {
-			requeteListeDistinctions = connection.createStatement();
-			// TODO factoriser chaines magiques dans des constantes - si possible interfaces
-			ResultSet curseurListeDistinctions = requeteListeDistinctions.executeQuery("SELECT * FROM distinction WHERE mouton = " + idMouton); // TODO requete preparee
+			requeteListeDistinctions = connection.prepareStatement(SQL_LISTER_DISTINCTIONS_PAR_MOUTON);
+			requeteListeDistinctions.setInt(1, idMouton);
+			ResultSet curseurListeDistinctions = requeteListeDistinctions.executeQuery(); 
 			while(curseurListeDistinctions.next())
 			{
 				int id = curseurListeDistinctions.getInt("id");
