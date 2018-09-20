@@ -72,11 +72,13 @@ BEGIN
         operation := 'MODIFIER';
     END IF;
 	IF TG_OP = 'INSERT' THEN
+    	objetAvant := '{}';
    		objetApres := '{'||NEW.nom||','||NEW.couleur||','||NEW.naissance||'}';
         operation := 'AJOUTER';
     END IF;
 	IF TG_OP = 'DELETE' THEN
     	objetAvant := '{'||OLD.nom||','||OLD.couleur||','||OLD.naissance||'}';
+    	objetApres := '{}';
         operation := 'EFFACER';
     END IF;
 
@@ -253,13 +255,25 @@ INSERT INTO journal VALUES (15, '2018-09-20 11:23:48.700641-04', 'INSERT', '{Joj
 INSERT INTO journal VALUES (16, '2018-09-20 11:29:06.004611-04', 'INSERT', ' -> {Jojo,verte,aout}', 'mouton');
 INSERT INTO journal VALUES (17, '2018-09-20 11:30:33.415524-04', 'INSERT', ' -> {Jojo,verte,aout}', 'mouton');
 INSERT INTO journal VALUES (18, '2018-09-20 11:35:55.719039-04', 'AJOUTER', ' -> {Jojo,verte,aout}', 'mouton');
+INSERT INTO journal VALUES (19, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Jojo,verte,aout} -> {Loulou,verte,aout}', 'mouton');
+INSERT INTO journal VALUES (20, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Jojo,verte,aout} -> {Loulou,verte,aout}', 'mouton');
+INSERT INTO journal VALUES (21, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Jojo,verte,aout} -> {Loulou,verte,aout}', 'mouton');
+INSERT INTO journal VALUES (22, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Jojo,verte,aout} -> {Loulou,verte,aout}', 'mouton');
+INSERT INTO journal VALUES (23, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Jojo,verte,aout} -> {Loulou,verte,aout}', 'mouton');
+INSERT INTO journal VALUES (24, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Jojo,verte,aout} -> {Loulou,verte,aout}', 'mouton');
+INSERT INTO journal VALUES (25, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Jojo,verte,aout} -> {Loulou,verte,aout}', 'mouton');
+INSERT INTO journal VALUES (26, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Jojo,verte,aout} -> {Loulou,verte,aout}', 'mouton');
+INSERT INTO journal VALUES (27, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Jojo,verte,aout} -> {Loulou,verte,aout}', 'mouton');
+INSERT INTO journal VALUES (28, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Jojo,verte,aout} -> {Loulou,verte,aout}', 'mouton');
+INSERT INTO journal VALUES (29, '2018-09-20 11:39:37.70787-04', 'EFFACER', '{Loulou,verte,aout} -> ', 'mouton');
+INSERT INTO journal VALUES (30, '2018-09-20 11:40:48.312734-04', 'EFFACER', '{Loulou,verte,aout} -> {}', 'mouton');
 
 
 --
 -- Name: journal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('journal_id_seq', 18, true);
+SELECT pg_catalog.setval('journal_id_seq', 30, true);
 
 
 --
@@ -274,16 +288,16 @@ INSERT INTO mouton VALUES ('Blabla', 'Rouge', '5', '2018', 14);
 INSERT INTO mouton VALUES ('Kwei kwei', 'Noir', '5', '2016', 6);
 INSERT INTO mouton VALUES ('Dolly', 'Rousse', '20', '5 juin 2015', 2);
 INSERT INTO mouton VALUES ('Molly2', 'Blanche', '20', '7 juillet 2018', 1);
-INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 24);
-INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 25);
-INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 26);
-INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 27);
-INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 28);
-INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 29);
-INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 31);
-INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 33);
-INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 34);
-INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 36);
+INSERT INTO mouton VALUES ('Loulou', 'verte', '7', 'aout', 24);
+INSERT INTO mouton VALUES ('Loulou', 'verte', '7', 'aout', 25);
+INSERT INTO mouton VALUES ('Loulou', 'verte', '7', 'aout', 26);
+INSERT INTO mouton VALUES ('Loulou', 'verte', '7', 'aout', 27);
+INSERT INTO mouton VALUES ('Loulou', 'verte', '7', 'aout', 28);
+INSERT INTO mouton VALUES ('Loulou', 'verte', '7', 'aout', 29);
+INSERT INTO mouton VALUES ('Loulou', 'verte', '7', 'aout', 31);
+INSERT INTO mouton VALUES ('Loulou', 'verte', '7', 'aout', 33);
+INSERT INTO mouton VALUES ('Loulou', 'verte', '7', 'aout', 34);
+INSERT INTO mouton VALUES ('Loulou', 'verte', '7', 'aout', 36);
 
 
 --
@@ -329,6 +343,13 @@ CREATE INDEX fki_one_mouton_to_many_distinction ON distinction USING btree (mout
 --
 
 CREATE TRIGGER evenementajoutmouton BEFORE INSERT ON mouton FOR EACH ROW EXECUTE PROCEDURE journaliser();
+
+
+--
+-- Name: mouton evenementeffacermouton; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER evenementeffacermouton BEFORE DELETE ON mouton FOR EACH ROW EXECUTE PROCEDURE journaliser();
 
 
 --
