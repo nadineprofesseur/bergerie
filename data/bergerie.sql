@@ -85,6 +85,10 @@ BEGIN
 	description := objetAvant || ' -> ' || objetApres;
     -- https://www.postgresql.org/docs/9.1/static/plpgsql-trigger.html
 	INSERT into journal(moment, operation, objet, description) VALUES(NOW(), operation, 'mouton', description);
+    
+	IF TG_OP = 'DELETE' THEN
+		return OLD;
+	END IF; 
     return NEW;
 END
 $$;
@@ -267,13 +271,14 @@ INSERT INTO journal VALUES (27, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Jo
 INSERT INTO journal VALUES (28, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Jojo,verte,aout} -> {Loulou,verte,aout}', 'mouton');
 INSERT INTO journal VALUES (29, '2018-09-20 11:39:37.70787-04', 'EFFACER', '{Loulou,verte,aout} -> ', 'mouton');
 INSERT INTO journal VALUES (30, '2018-09-20 11:40:48.312734-04', 'EFFACER', '{Loulou,verte,aout} -> {}', 'mouton');
+INSERT INTO journal VALUES (31, '2018-09-20 11:42:43.235306-04', 'EFFACER', '{Loulou,verte,aout} -> {}', 'mouton');
 
 
 --
 -- Name: journal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('journal_id_seq', 30, true);
+SELECT pg_catalog.setval('journal_id_seq', 31, true);
 
 
 --
@@ -290,7 +295,6 @@ INSERT INTO mouton VALUES ('Dolly', 'Rousse', '20', '5 juin 2015', 2);
 INSERT INTO mouton VALUES ('Molly2', 'Blanche', '20', '7 juillet 2018', 1);
 INSERT INTO mouton VALUES ('Loulou', 'verte', '7', 'aout', 24);
 INSERT INTO mouton VALUES ('Loulou', 'verte', '7', 'aout', 25);
-INSERT INTO mouton VALUES ('Loulou', 'verte', '7', 'aout', 26);
 INSERT INTO mouton VALUES ('Loulou', 'verte', '7', 'aout', 27);
 INSERT INTO mouton VALUES ('Loulou', 'verte', '7', 'aout', 28);
 INSERT INTO mouton VALUES ('Loulou', 'verte', '7', 'aout', 29);
