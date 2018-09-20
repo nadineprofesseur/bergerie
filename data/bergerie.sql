@@ -57,8 +57,11 @@ SET search_path = public, pg_catalog;
 CREATE FUNCTION journaliser() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
+DECLARE 
+	description text;
 BEGIN
-	INSERT into journal(moment, operation, objet, description) VALUES(NOW(), 'AJOUTER', 'mouton', '{Dolly, 2016-06-01}');
+	description := '{'|| NEW.nom ||'}';
+	INSERT into journal(moment, operation, objet, description) VALUES(NOW(), 'AJOUTER', 'mouton', description);
     return NEW;
 END
 $$;
@@ -224,13 +227,14 @@ INSERT INTO journal VALUES (1, '2018-09-20 10:30:34.923266-04', 'AJOUTER', '{Dol
 INSERT INTO journal VALUES (11, '2018-09-20 10:59:36.967935-04', 'AJOUTER', '{Dolly, 2016-06-01}', 'mouton');
 INSERT INTO journal VALUES (12, '2018-09-20 11:00:58.498813-04', 'AJOUTER', '{Dolly, 2016-06-01}', 'mouton');
 INSERT INTO journal VALUES (13, '2018-09-20 11:04:32.144692-04', 'AJOUTER', '{Jojo}', 'mouton');
+INSERT INTO journal VALUES (14, '2018-09-20 11:06:51.817885-04', 'AJOUTER', '{Jojo}', 'mouton');
 
 
 --
 -- Name: journal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('journal_id_seq', 13, true);
+SELECT pg_catalog.setval('journal_id_seq', 14, true);
 
 
 --
@@ -250,13 +254,14 @@ INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 25);
 INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 26);
 INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 27);
 INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 28);
+INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 29);
 
 
 --
 -- Name: mouton_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('mouton_id_seq', 28, true);
+SELECT pg_catalog.setval('mouton_id_seq', 29, true);
 
 
 --
