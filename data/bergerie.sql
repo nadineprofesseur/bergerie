@@ -50,6 +50,21 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 SET search_path = public, pg_catalog;
 
+--
+-- Name: journaliser(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION journaliser() RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+	INSERT into journal(moment, operation, objet, description) VALUES(NOW(), 'AJOUTER', 'mouton', '{Dolly, 2016-06-01}');
+END
+$$;
+
+
+ALTER FUNCTION public.journaliser() OWNER TO postgres;
+
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -88,6 +103,42 @@ ALTER TABLE distinction_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE distinction_id_seq OWNED BY distinction.id;
+
+
+--
+-- Name: journal; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE journal (
+    id integer NOT NULL,
+    moment timestamp with time zone NOT NULL,
+    operation text NOT NULL,
+    description text,
+    objet text NOT NULL
+);
+
+
+ALTER TABLE journal OWNER TO postgres;
+
+--
+-- Name: journal_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE journal_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE journal_id_seq OWNER TO postgres;
+
+--
+-- Name: journal_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE journal_id_seq OWNED BY journal.id;
 
 
 --
@@ -134,6 +185,13 @@ ALTER TABLE ONLY distinction ALTER COLUMN id SET DEFAULT nextval('distinction_id
 
 
 --
+-- Name: journal id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY journal ALTER COLUMN id SET DEFAULT nextval('journal_id_seq'::regclass);
+
+
+--
 -- Name: mouton id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -144,13 +202,31 @@ ALTER TABLE ONLY mouton ALTER COLUMN id SET DEFAULT nextval('mouton_id_seq'::reg
 -- Data for Name: distinction; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO distinction VALUES (1, 2017, 'Mouton le plus sage', NULL, 2);
+INSERT INTO distinction VALUES (2, 2015, 'Mouton le plus rapide', NULL, 2);
+INSERT INTO distinction VALUES (3, 2016, 'Mouton le plus roux', NULL, 1);
+INSERT INTO distinction VALUES (4, 2016, 'Mouton le plus noir', NULL, 2);
 
 
 --
 -- Name: distinction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('distinction_id_seq', 1, false);
+SELECT pg_catalog.setval('distinction_id_seq', 4, true);
+
+
+--
+-- Data for Name: journal; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO journal VALUES (1, '2018-09-20 10:30:34.923266-04', 'AJOUTER', '{Dolly, 2016-06-01}', 'mouton');
+
+
+--
+-- Name: journal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('journal_id_seq', 1, true);
 
 
 --
@@ -159,18 +235,19 @@ SELECT pg_catalog.setval('distinction_id_seq', 1, false);
 
 INSERT INTO mouton VALUES ('Dodo', 'Rose', '', '', 5);
 INSERT INTO mouton VALUES ('Marguerite', 'Tachetée', '10', '2 août 2017', 3);
-INSERT INTO mouton VALUES ('Dolly', 'Rousse', '20', '5 juin 2015', 2);
 INSERT INTO mouton VALUES ('test', 'test', 'test', 'test', 13);
-INSERT INTO mouton VALUES ('Molly2', 'Blanche', '20', '7 juillet 2018', 1);
 INSERT INTO mouton VALUES ('alloallo', 'rose', '', '', 4);
-INSERT INTO mouton VALUES ('Coucou', 'Noir', '5', '2016', 6);
+INSERT INTO mouton VALUES ('Blabla', 'Rouge', '5', '2018', 14);
+INSERT INTO mouton VALUES ('Kwei kwei', 'Noir', '5', '2016', 6);
+INSERT INTO mouton VALUES ('Dolly', 'Rousse', '20', '5 juin 2015', 2);
+INSERT INTO mouton VALUES ('Molly2', 'Blanche', '20', '7 juillet 2018', 1);
 
 
 --
 -- Name: mouton_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('mouton_id_seq', 13, true);
+SELECT pg_catalog.setval('mouton_id_seq', 14, true);
 
 
 --
@@ -179,6 +256,14 @@ SELECT pg_catalog.setval('mouton_id_seq', 13, true);
 
 ALTER TABLE ONLY distinction
     ADD CONSTRAINT distinction_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: journal journal_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY journal
+    ADD CONSTRAINT journal_pkey PRIMARY KEY (id);
 
 
 --
