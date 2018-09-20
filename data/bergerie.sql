@@ -59,9 +59,24 @@ CREATE FUNCTION journaliser() RETURNS trigger
     AS $$
 DECLARE 
 	description text;
+    objetAvant text;
+    objetApres text;
 BEGIN
-	description := '{'|| NEW.nom ||'}';
-	INSERT into journal(moment, operation, objet, description) VALUES(NOW(), 'AJOUTER', 'mouton', description);
+	objetAvant := '';
+	objetApres := '';
+
+    -- cas de modifier ou supprimer 
+    -- IF OLD is not NULL THEN
+	--     	objetAvant := '{'||OLD.nom||','||OLD.couleur||','||OLD.naissance||'}';
+    -- END IF;
+    -- cas de modifier ou supprimer 
+    IF NEW is not NULL THEN
+	    	objetApres := '{'||NEW.nom||','||NEW.couleur||','||NEW.naissance||'}';
+    END IF;
+
+	description := objetAvant || ' -> ' || objetApres;
+    -- https://www.postgresql.org/docs/9.1/static/plpgsql-trigger.html
+	INSERT into journal(moment, operation, objet, description) VALUES(NOW(), TG_OP, 'mouton', description);
     return NEW;
 END
 $$;
@@ -228,13 +243,16 @@ INSERT INTO journal VALUES (11, '2018-09-20 10:59:36.967935-04', 'AJOUTER', '{Do
 INSERT INTO journal VALUES (12, '2018-09-20 11:00:58.498813-04', 'AJOUTER', '{Dolly, 2016-06-01}', 'mouton');
 INSERT INTO journal VALUES (13, '2018-09-20 11:04:32.144692-04', 'AJOUTER', '{Jojo}', 'mouton');
 INSERT INTO journal VALUES (14, '2018-09-20 11:06:51.817885-04', 'AJOUTER', '{Jojo}', 'mouton');
+INSERT INTO journal VALUES (15, '2018-09-20 11:23:48.700641-04', 'INSERT', '{Jojo} -> {Jojo}', 'mouton');
+INSERT INTO journal VALUES (16, '2018-09-20 11:29:06.004611-04', 'INSERT', ' -> {Jojo,verte,aout}', 'mouton');
+INSERT INTO journal VALUES (17, '2018-09-20 11:30:33.415524-04', 'INSERT', ' -> {Jojo,verte,aout}', 'mouton');
 
 
 --
 -- Name: journal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('journal_id_seq', 14, true);
+SELECT pg_catalog.setval('journal_id_seq', 17, true);
 
 
 --
@@ -255,13 +273,16 @@ INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 26);
 INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 27);
 INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 28);
 INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 29);
+INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 31);
+INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 33);
+INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 34);
 
 
 --
 -- Name: mouton_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('mouton_id_seq', 29, true);
+SELECT pg_catalog.setval('mouton_id_seq', 35, true);
 
 
 --
@@ -300,6 +321,13 @@ CREATE INDEX fki_one_mouton_to_many_distinction ON distinction USING btree (mout
 --
 
 CREATE TRIGGER evenementajoutmouton BEFORE INSERT ON mouton FOR EACH ROW EXECUTE PROCEDURE journaliser();
+
+
+--
+-- Name: mouton evenementmodifiermouton; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER evenementmodifiermouton BEFORE UPDATE ON mouton FOR EACH ROW EXECUTE PROCEDURE journaliser();
 
 
 --
