@@ -54,11 +54,12 @@ SET search_path = public, pg_catalog;
 -- Name: journaliser(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
-CREATE FUNCTION journaliser() RETURNS void
+CREATE FUNCTION journaliser() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 BEGIN
 	INSERT into journal(moment, operation, objet, description) VALUES(NOW(), 'AJOUTER', 'mouton', '{Dolly, 2016-06-01}');
+    return NEW;
 END
 $$;
 
@@ -220,13 +221,16 @@ SELECT pg_catalog.setval('distinction_id_seq', 4, true);
 --
 
 INSERT INTO journal VALUES (1, '2018-09-20 10:30:34.923266-04', 'AJOUTER', '{Dolly, 2016-06-01}', 'mouton');
+INSERT INTO journal VALUES (11, '2018-09-20 10:59:36.967935-04', 'AJOUTER', '{Dolly, 2016-06-01}', 'mouton');
+INSERT INTO journal VALUES (12, '2018-09-20 11:00:58.498813-04', 'AJOUTER', '{Dolly, 2016-06-01}', 'mouton');
+INSERT INTO journal VALUES (13, '2018-09-20 11:04:32.144692-04', 'AJOUTER', '{Jojo}', 'mouton');
 
 
 --
 -- Name: journal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('journal_id_seq', 1, true);
+SELECT pg_catalog.setval('journal_id_seq', 13, true);
 
 
 --
@@ -241,13 +245,18 @@ INSERT INTO mouton VALUES ('Blabla', 'Rouge', '5', '2018', 14);
 INSERT INTO mouton VALUES ('Kwei kwei', 'Noir', '5', '2016', 6);
 INSERT INTO mouton VALUES ('Dolly', 'Rousse', '20', '5 juin 2015', 2);
 INSERT INTO mouton VALUES ('Molly2', 'Blanche', '20', '7 juillet 2018', 1);
+INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 24);
+INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 25);
+INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 26);
+INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 27);
+INSERT INTO mouton VALUES ('Jojo', 'verte', '7', 'aout', 28);
 
 
 --
 -- Name: mouton_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('mouton_id_seq', 14, true);
+SELECT pg_catalog.setval('mouton_id_seq', 28, true);
 
 
 --
@@ -279,6 +288,13 @@ ALTER TABLE ONLY mouton
 --
 
 CREATE INDEX fki_one_mouton_to_many_distinction ON distinction USING btree (mouton);
+
+
+--
+-- Name: mouton evenementajoutmouton; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER evenementajoutmouton BEFORE INSERT ON mouton FOR EACH ROW EXECUTE PROCEDURE journaliser();
 
 
 --
