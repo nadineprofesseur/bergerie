@@ -37,7 +37,7 @@ public class MoutonDAO implements MoutonSQL{
 		Statement requeteListeMoutons;
 		try {
 			requeteListeMoutons = connection.createStatement();
-			ResultSet curseurListeMoutons = requeteListeMoutons.executeQuery(SQL_LISTER_MOUTONS);
+			ResultSet curseurListeMoutons = requeteListeMoutons.executeQuery(MoutonSQL.SQL_LISTER_MOUTONS);
 			while(curseurListeMoutons.next())
 			{
 				int id = curseurListeMoutons.getInt("id");

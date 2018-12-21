@@ -21,6 +21,11 @@ public class DistinctionDAO implements DistinctionSQL {
 		this.connection = BaseDeDonnees.getInstance().getConnection();
 	}
 	
+	public void ajouterDistinction(int idMouton, Distinction distinction)
+	{
+		
+	}
+	
 	public List<Distinction> listerDistinctionsParMouton(int idMouton)
 	{
 		System.out.println("DistinctionDAO.listerDistinctions()");
